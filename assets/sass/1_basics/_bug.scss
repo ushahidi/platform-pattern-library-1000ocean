@@ -15,26 +15,25 @@
         color: $color-light-alpha;
     }
 
-    .badge {
+    img.avatar {
         display: inline-block;
+        vertical-align: middle;
+        width: $base-spacing;
+        height: $base-spacing;
+        margin-right: 4px;
+    }
+
+    .badge {
         height: $sm-spacing;
         width: $sm-spacing;
-        color: black;
         font-size: 10px;
-        font-weight: bold;
-        text-align: center;
-        line-height: 1.4;
-        white-space: nowrap;
-        vertical-align: middle;
-        @include equal-radius(100%);
-        background: $highlight;
         @include lrswap(margin, 0 0 3px 8px);
     }
 
     svg.iconic {
         position: absolute;
         top: 50%;
-        left: 10px;
+        right: 10px;
         margin-top: -6px;
         fill: $highlight;
 
@@ -45,8 +44,13 @@
 
         + * {
             display: block;
-            @include padding-left(20px);
+            @include padding-right(20px);
         }
+    }
+
+    .label {
+        vertical-align: middle;
+        @include padding-right($sm-spacing);
     }
 
 }

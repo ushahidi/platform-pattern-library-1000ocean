@@ -4,73 +4,107 @@
     font-size: .857142857rem;
     line-height: 1.4;
 
-    .metadata-author {
-        font-weight: $bold;
-    }
+    .chip {
+        margin: $tiny-spacing 4px;
 
-    a.metadata-author {
-        border-bottom: 1px dotted $color-primary-gamma;
-
-        &:hover {
-            border-bottom-style: solid;
+        .avatar {
+            top: auto;
+            margin-right: 0;
         }
     }
 
+    hr {
+        display: inline-block;
+        width: 1px;
+        height: $base-spacing;
+        vertical-align: middle;
+        background: $color-light-beta;
+        border: 0;
+        margin: 4px;
+    }
+
     .avatar {
-        display: inline;
+        display: inline-block;
         position: relative;
-        top: 5px;
+        top: -2px;
         width: 20px;
         height: 20px;
-        margin-top: -6px;
-        margin-right: 4px;
-        margin-left: 4px;
+        vertical-align: middle;
+        margin-right: 2px;
 
         &:hover {
             border-color: rgba(0,0,0,.24);
         }
     }
 
-    .metadata-visibility {
+    .metadata-status {
+        display: block;
+        margin: $tiny-spacing 0;
+
+        @include media($medium) {
+
+        }
+    }
+
+    li {
         display: inline-block;
-        width: 16px;
-        height: 16px;
-        text-align: center;
-        @include equal-radius(100%);
-        background-color: $red;
-        box-shadow: 0 0 0 rgba(0,0,0,.16) inset,
-            0 0 8px $red;
-        padding: 2px;
-        margin: 0 $tiny-spacing;
+        list-style: none;
+        margin: 0;
 
-        svg.iconic {
-            width: 12px;
-            height: 12px;
-            fill: $color-light-delta;
+        &:after {
+            content: '\00b7';
+            display: inline-block;
+            color: $color-dark-gamma;
+            margin: 0 2px;
         }
 
-        &.public {
-            background-color: $green;
-            box-shadow: 0 0 0 rgba(0,0,0,.16) inset,
-                0 0 8px $green;
-        }
+        &:last-child {
 
-        &.tooltip {
-
-            .bug {
-                top: -6px;
-                right: 100%;
+            &:after {
+                content: none;
             }
         }
     }
 
     ul {
         margin-top: 0;
+        margin-left: 22px;
         margin-bottom: 0;
 
         li {
             margin-top: $tiny-spacing;
             margin-bottom: $tiny-spacing;
+        }
+    }
+
+    .status-indicator {
+        vertical-align: middle;
+        margin-right: 2px;
+    }
+}
+
+ul.metadata,
+ol.metadata {
+    margin: 0;
+}
+
+ol.metadata {
+    margin: 0;
+
+    li {
+
+        &:after {
+            content: '\2192';
+            display: inline-block;
+            color: $color-dark-gamma;
+            margin: 0 2px;
+        }
+
+        &:last-child {
+
+            &:after {
+                content: none;
+            }
         }
     }
 }

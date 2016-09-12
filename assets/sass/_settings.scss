@@ -87,6 +87,9 @@ $color-primary-delta: #60646B;
 $color-primary-epsilon: #8E9297;
 $color-primary-zeta: #F1F1F4;
 
+// secondary color spectrum, based on secondary color (gold)
+$color-secondary-alpha: #b98200;
+
 $black: $color-dark-alpha;
 $mid-black: lighten( $color-dark-alpha, 8% );
 $lt-black: lighten(desaturate(adjust-hue($color-dark-alpha, 4.8485), 10.3708), 28.6275);
@@ -159,9 +162,8 @@ $base-font-family: 'Lato', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans
 $base-font-color: $base-color;
 $sub-base-font-color: $text-color;
 $body-font-weight: normal;
-$body-font-weight: 400;
 $body-font-style: normal;
-$bold: 900;
+$bold: 800;
 
 $base-font-size: 14px;
 $base-line-height: 1.266666667;

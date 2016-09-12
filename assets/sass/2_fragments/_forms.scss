@@ -2,16 +2,17 @@
 fieldset {
     @include clearfix;
     position: relative;
-    margin-bottom: $base-spacing;
+    margin-top: $huge-spacing;
+    margin-bottom: $huge-spacing;
 
-    &:last-child,
-    .form-field {
-        margin-bottom: 0;
+    @include media($medium) {
+        margin-top: 64px;
+        margin-bottom: 64px;
     }
 
     label {
         display: block;
-        margin-bottom: $tiny-spacing;
+        margin-bottom: $sm-spacing;
 
         + p {
             font-style: italic;
@@ -25,6 +26,10 @@ fieldset {
         .custom-select,
         select {
             margin-top: $tiny-spacing;
+        }
+
+        svg.iconic {
+            margin-right: 4px;
         }
 
         .tooltip {
@@ -74,6 +79,31 @@ fieldset {
             + input {
                 margin-left: $sm-spacing;
             }
+        }
+    }
+
+    .bug {
+        color: $color-dark-alpha;
+        border: 1px solid $color-light-beta;
+        background-color: $color-light-gamma;
+
+        svg.iconic {
+            fill: $color-primary-gamma;
+
+            &:hover {
+                fill: darken($color-primary-gamma, 20%);
+            }
+        }
+    }
+
+    .form-field {
+        margin-top: 0;
+        margin-bottom: $tiny-spacing;
+
+        label {
+            font-size: 14px;
+            font-size: 1rem;
+            margin-bottom: $tiny-spacing;
         }
     }
 
@@ -147,11 +177,17 @@ fieldset {
         }
     }
 
+    &.buttons {
+        margin: 0;
+    }
+
     // CHECKBOX OR RADIO BUTTON
     &.checkbox,
     &.radio {
         position: relative;
         @include padding-left(14px + $tiny-spacing);
+        margin-top: 0;
+        margin-bottom: $tiny-spacing;
 
         label {
             color: $text-color;
@@ -176,6 +212,13 @@ fieldset {
             margin-right: 4px;
         }
 
+        img.avatar {
+            display: inline-block;
+            width: $base-spacing;
+            height: $base-spacing;
+            margin-right: 4px;
+        }
+
         .custom-select {
             margin-top: 4px;
         }
@@ -184,10 +227,41 @@ fieldset {
             margin-bottom: $sm-spacing;
         }
 
+        .form-field {
+
+            &.checkbox,
+            &.radio {
+
+                &:first-of-type {
+                    margin-top: $sm-spacing;
+                }
+            }
+        }
+
+        &.checked {
+
+            .modal-title {
+                color: $color-dark-delta;
+                font-weight: normal;
+                text-decoration: line-through;
+            }
+        }
+
+        &.disabled {
+
+            label {
+                color: $color-dark-delta;
+
+                &:hover {
+                    cursor: not-allowed;
+                }
+            }
+        }
+
         &.icon-input {
-            //          @include padding-left(0);
 
             > label {
+                vertical-align: middle;
 
                 &:before {
                     position: absolute;
@@ -202,6 +276,10 @@ fieldset {
                     @include equal-radius(100%);
                     background-color: $color-secondary;
                     padding: 2px;
+                }
+
+                img.avatar {
+                    vertical-align: middle;
                 }
             }
 
@@ -230,14 +308,18 @@ fieldset {
     // TITLE
     &.title {
 
-        label {
-            display: none;
-        }
-
         input[type="text"] {
             max-width: none;
             @include typeBeta;
             padding: $sm-spacing;
+        }
+    }
+
+    // SURVEY TITLE
+    &.survey-title {
+
+        input[type="text"] {
+            text-align: center;
         }
     }
 
@@ -279,7 +361,7 @@ fieldset {
             + .searchbar {
                 position: absolute;
                 z-index: $toolbox;
-                top: $base-spacing;
+                top: $huge-spacing;
                 right: $tiny-spacing;
                 left: $tiny-spacing;
                 margin: 0;
@@ -323,7 +405,7 @@ fieldset {
             position: absolute;
             z-index: -1;
 
-            ~ label {
+            + label {
                 display: inline-block;
 
                 &:hover {
@@ -348,6 +430,7 @@ fieldset {
     &.url {
 
         input[type="text"],
+        input[type="number"],
         input[type="url"] {
             display: inline-block;
             width: auto;
@@ -358,16 +441,11 @@ fieldset {
         }
     }
 
+    &.inline,
     &.date {
         display: inline-table;
-        /*
-        svg.iconic {
-        position: absolute;
-        top: 11px;
-        @include left(16px);
-        fill: $color-primary;
     }
-    */
+
 
     input[type="date"] {
         padding-right: 4px;
@@ -382,119 +460,123 @@ fieldset {
         background-color: $color-light-delta;
         padding: 4px;
         margin-top: $tiny-spacing;
-        margin-bottom: $tiny-spacing;
         margin-left: $tiny-spacing;
     }
-}
 
-&.location-picker {
-    display: inline-block;
-    max-width: 200px;
+    &.location-picker {
+        display: inline-block;
+        max-width: 200px;
 
-    input {
-        box-shadow: none;
+        input {
+            box-shadow: none;
+        }
+
+        .location-input {
+            position: relative;
+
+            input[type="text"] {
+                font-size: em(14);
+                margin: 0;
+                @include lrswap(padding, 8px 0 7px $sm-spacing);
+            }
+
+        }
+
+        .location-range {
+            display: inline-block;
+            border-right: $base-border;
+            border-bottom: $base-border;
+            @include border-left($base-border);
+            padding: 10px;
+            background-color: $lt-brown;
+
+            label {
+                margin-top: 10px;
+            }
+
+            label,
+            input.distance,
+            select {
+                @include float(left);
+            }
+
+            input.distance {
+                width: auto;
+                max-width: 35px;
+                @include lrswap(margin, 0 10px 0 0);
+            }
+
+            .custom-select {
+                margin-bottom: 0;
+            }
+
+            input[type="range"] {
+                margin: 0;
+            }
+
+        }
+
     }
 
-    .location-input {
+    &.input-and-button {
+
+        @include media($medium) {
+
+            input,
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="search"],
+            input[type="url"] {
+                display: inline-block;
+            }
+
+            button,
+            .button {
+                margin-top: -2px;
+            }
+        }
+    }
+
+    // TOGGLE SWITCH
+    &.switch {
         position: relative;
 
-        input[type="text"] {
-            font-size: em(14);
-            margin: 0;
-            @include lrswap(padding, 8px 0 7px $sm-spacing);
+        .toggle-switch {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            label {
+                margin: 0;
+            }
+        }
+
+        > label {
+            display: block;
+            color: $text-color;
+            @include typeBase;
+            text-transform: none;
+            letter-spacing: 0;
+            padding-right: 72px;
+        }
+
+        &.disabled {
+
+            > label {
+                color: $color-dark-delta;
+
+                &:hover {
+                    cursor: not-allowed;
+                }
+
+                svg.iconic {
+                    fill: $color-dark-delta;
+                }
+            }
         }
 
     }
-
-    .location-range {
-        display: inline-block;
-        border-right: $base-border;
-        border-bottom: $base-border;
-        @include border-left($base-border);
-        padding: 10px;
-        background-color: $lt-brown;
-
-        label {
-            margin-top: 10px;
-        }
-
-        label,
-        input.distance,
-        select {
-            @include float(left);
-        }
-
-        input.distance {
-            width: auto;
-            max-width: 35px;
-            @include lrswap(margin, 0 10px 0 0);
-        }
-
-        .custom-select {
-            margin-bottom: 0;
-        }
-
-        input[type="range"] {
-            margin: 0;
-        }
-
-    }
-
-}
-
-&.input-and-button {
-
-    @include media($medium) {
-
-        input,
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="search"],
-        input[type="url"] {
-            display: inline-block;
-        }
-
-        button,
-        .button {
-            margin-top: -2px;
-        }
-    }
-}
-
-// TOGGLE SWITCH
-&.switch {
-    position: relative;
-
-    .toggle-switch {
-        position: absolute;
-        top: 0;
-        right: 0;
-
-        label {
-            margin: 0;
-        }
-    }
-
-    > label {
-        display: block;
-        color: $text-color;
-        @include typeBase;
-        text-transform: none;
-        letter-spacing: 0;
-        padding-right: 72px;
-    }
-
-/*
-    .form-field {
-        border-left: 2px solid $color-light-beta;
-        padding-left: $sm-spacing;
-        margin-top: $sm-spacing;
-        margin-bottom: $sm-spacing;
-    }
-*/
-
-}
 }
 
 .input-with-icon {
@@ -514,7 +596,7 @@ fieldset {
     input[type="time"],
     input[type="url"],
     input[type="week"] {
-        @include padding-left($lg-spacing);
+        @include padding-left(38px);
     }
 
     svg.iconic {
@@ -522,6 +604,17 @@ fieldset {
         top: 13px;
         @include left(16px);
         fill: $color-primary;
+    }
+}
+
+.input-with-dropdown {
+
+    .dropdown-menu {
+        display: none;
+
+        &.active {
+            display: block;
+        }
     }
 }
 
@@ -578,8 +671,8 @@ fieldset,
 
     .form-field &,
     fieldset & {
-        // border-left: 2px solid $color-light-beta;
-        // padding-left: $sm-spacing;
+        border-left: 2px solid $color-light-beta;
+        padding-left: $sm-spacing;
         margin-top: $sm-spacing;
 
         fieldset {
@@ -618,114 +711,90 @@ fieldset,
 
     &.init {
         position: relative;
+        margin-top: $tiny-spacing;
 
         label {
             position: absolute;
-            top: $sm-spacing;
             z-index: $top;
-            color: $color-dark-delta;
-            font-weight: normal;
-            font-size: 14px;
-            font-size: 1rem;
-            letter-spacing: normal;
-            text-transform: none;
+            top: $tiny-spacing;
             pointer-events: none;
             @include transition(all .25s);
         }
 
-        /*
-        .textarea-label {
-        top: 45px;
-    }
-    */
-    input[type="text"],
-    textarea {
-        height: auto;
-        overflow:hidden;
-        outline: none;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        background-color: transparent;
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-        box-shadow: none;
-        resize: none;
-    }
-
-    &.focus,
-    &.value {
-
-        label {
-            top: -6px;
-            @extend .caps;
-            font-size: 10px !important;
-            font-size: .714285714rem !important;
-        }
-
         input[type="text"],
+        input[type="url"],
+        input[type="email"],
+        input[type="number"],
         textarea {
+            max-width: 450px;
             height: auto;
+            overflow:hidden;
+            outline: none;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            background-color: transparent;
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            box-shadow: none;
+            resize: none;
         }
 
-        textarea {
-            outline: transparent;
+        &.focus,
+        &.value {
+
+            label {
+                top: -6px;
+            }
+
+            input[type="text"],
+            textarea {
+                height: auto;
+            }
+
+            textarea {
+                outline: transparent;
+                padding-top: $base-spacing;
+            }
+        }
+
+        &.focus {
+
+            label {
+                color: darken( $color-secondary, 20% );
+            }
+
+            input[type="text"],
+            textarea {
+                border-bottom-color: $color-secondary;
+            }
+        }
+
+        &.title {
+
+            label {
+                display: block;
+                font-size: 20px;
+                font-size: 1.428571429rem;
+            }
+
+            input[type="text"] {
+                padding-top: $base-spacing;
+            }
+        }
+
+        &.error {
+
+            label {
+                color: $error-color !important;
+            }
+
+            input,
+            textarea {
+                border-color: $error-color !important;
+            }
         }
     }
-
-    &.focus {
-
-        label {
-            color: darken( $color-secondary, 20% );
-        }
-
-        input[type="text"],
-        textarea {
-            border-bottom-color: $color-secondary;
-        }
-    }
-
-    &.title {
-
-        label {
-            display: block;
-            font-size: 20px;
-            font-size: 1.428571429rem;
-        }
-
-        input[type="text"] {
-            padding-top: $base-spacing;
-        }
-    }
-
-    &.error {
-
-        label {
-            color: $error-color !important;
-        }
-
-        input,
-        textarea {
-            border-color: $error-color !important;
-        }
-    }
-}
-
-&.required {
-
-    label {
-
-        &:after {
-            content: '\2217';
-            color: $red;
-            font-weight: normal;
-            font-size: 1.4em;
-            line-height: 0;
-            @include margin-left($tiny-spacing);
-        }
-    }
-}
-
 }
 
 .location-adapt {

@@ -8,8 +8,12 @@
         margin-right: $lg-spacing;
 
         svg.iconic {
-            fill: $color-tertiary;
+            fill: $color-dark-delta;
             margin-right: 4px;
+        }
+
+        + .task {
+            margin-top: $tiny-spacing;
         }
     }
 
@@ -57,6 +61,14 @@
         fieldset {
             margin-top: 0;
         }
+
+        .form-field {
+
+            &.checkbox,
+            &.radio {
+                margin-bottom: 0;
+            }
+        }
     }
 
     .listing-item {
@@ -66,6 +78,18 @@
 
             .listing-item-image {
                 top: $sm-spacing;
+            }
+        }
+    }
+
+    .metadata {
+
+        li {
+            list-style-type: disc;
+            margin-bottom: $tiny-spacing;
+
+            &:after {
+                content: none;
             }
         }
     }
