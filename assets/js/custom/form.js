@@ -51,14 +51,29 @@ function checkedStatus(checkedButton) {
         formField.removeClass('checked');
     }
 
-    if (checkedButton[0].hasAttribute('data-fieldgroup-toggle')) {
-        var target = $('[data-fieldgroup-target="'+checkedButton.attr('data-fieldgroup-toggle')+'"]');
+    if (checkedButton.is(':disabled')) {
+        formField.addClass('disabled');
+    } else {
+        formField.removeClass('disabled');
+    }
+
+    // If the input has the attribute 'data-fieldgroup-toggle'...
+    if (checkedButton.is('[data-fieldgroup-toggle]')) {
+        var toggleId = checkedButton.attr('data-fieldgroup-toggle'),
+            target = $('[data-fieldgroup-target="'+ toggleId +'"]');
 
         // Add 'init' class to target and trigger
         checkedButton.addClass('init');
         target.addClass('init');
 
-        if (checkedButton.is(':checked')) {
+/*
+        if (target.closest('.modal-body').length) {
+            modalBody(target);
+        }
+*/
+
+        // If any input with the same 'data-fieldgroup-toggle' value is checked...
+        if ($('input[type="radio"], input[type="checkbox"]').is('[data-fieldgroup-toggle="'+ toggleId +'"]:checked')) {
             target.addClass('active');
         } else {
             target.removeClass('active');
@@ -94,49 +109,18 @@ $('input[type="time"]').pickatime({
     }
 });
 
-// Display search suggestions in dropdown when search input is in focus and has a value
-$('.searchbar-input').each(function(){
-    var input = $(this).find('input[type="search"]'),
-        dropdownMenu = $(this).find('.dropdown-menu'),
-        ghost = $(this).find('.input-ghost');
-
-    function inputGhostUpdate(str) {
-        if (str.includes(':')) {
-            var ghostVal = "";
-
-            $.each(str.split(' '), function(key, value){
-                if (key != 0) {
-                    ghostVal += " ";
-                }
-
-                if (value.includes(':')) {
-                    ghostVal += '<mark class="modifier">' + value + '</mark>';
-                } else {
-                    ghostVal += value;
-                }
-            });
-            ghost.html(ghostVal).addClass('active');
-            input.addClass('active');
-        } else {
-            ghost.html('').removeClass('active');
-            input.removeClass('active');
-        }
-    }
-
-    inputGhostUpdate(input.val());
+// Display dropdown when input is in focus and has a value
+$('.input-with-dropdown').each(function(){
+    var input = $(this).find('input'),
+        dropdownMenu = $(this).find('.dropdown-menu');
 
     input.on('keyup', function(){
         if (input.val()) {
             dropdownMenu.addClass('active');
         }
-        //inputGhostUpdate(input.val());
     });
 
     input.on('focusout', function(){
         dropdownMenu.removeClass('active');
-    });
-
-    input.on('change', function(){
-        // inputGhostUpdate(input.val());
     });
 });

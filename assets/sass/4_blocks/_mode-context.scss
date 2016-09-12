@@ -18,14 +18,7 @@
 
     .mode-context-title {
         color: $white;
-        font-size: 20px;
-        font-size: 1.428571429rem;
-        line-height: 1.3em;
-
-        @include media($medium) {
-            font-size: 26px;
-            font-size: 1.857142857rem;
-        }
+        @include typeAlpha;
 
         svg.iconic {
             width: .769230769em;
@@ -91,6 +84,15 @@
                 }
             }
         }
+
+        img.avatar {
+            display: none;
+            max-width: 140px;
+
+            @include media($medium) {
+                display: block;
+            }
+        }
     }
 
     .mode-context-trigger {
@@ -118,22 +120,11 @@
     .metadata {
         margin-bottom: $sm-spacing;
 
-        a.metadata-author {
+        a {
             color: $color-secondary;
 
             &:hover {
                 color: darken($color-secondary, 20%);
-            }
-        }
-
-        .metadata-visibility {
-
-            &.tooltip {
-
-                .bug {
-                    right: auto;
-                    left: 100%;
-                }
             }
         }
     }
@@ -196,6 +187,7 @@
 
         .form-field {
             margin-top: $sm-spacing;
+            margin-bottom: $sm-spacing;
 
             @include media($medium) {
                 text-align: center;
@@ -203,7 +195,17 @@
 
             button,
             .button {
+                font-size: 12px;
+                font-size: .857142857rem;
+                padding: 4px $tiny-spacing;
                 margin: $tiny-spacing;
+
+                svg.iconic {
+
+                    + .button-label {
+                        margin-left: 4px;
+                    }
+                }
             }
 
             .dropdown-menu {
@@ -302,6 +304,10 @@
                     width: auto;
                     overflow-x: visible;
                     white-space: normal;
+                }
+
+                img.avatar {
+                    display: block;
                 }
             }
 
