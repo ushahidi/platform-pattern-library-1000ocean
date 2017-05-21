@@ -1,5 +1,5 @@
 {
-  "name": "platform-pattern-library",
+  "name": "ushahidi-platform-pattern-library",
   "description": "Ushahidi Platform Pattern Library",
   "version": "3.5.0",
   "main": "gulpfile.js",
